@@ -66,6 +66,8 @@
  */
 @property (readonly) NSPersistentStoreCoordinator *backingPersistentStoreCoordinator;
 
+@property (readonly) NSManagedObjectContext *backingManagedObjectContext;
+
 ///-----------------------
 /// @name Required Methods
 ///-----------------------
@@ -101,6 +103,13 @@
 - (id)executeSaveChangesRequest:(NSSaveChangesRequest *)saveChangesRequest
                     withContext:(NSManagedObjectContext *)context
                           error:(NSError *__autoreleasing *)error;
+
+- (BOOL)insertOrUpdateObjectsFromRepresentations:(id)representationOrArrayOfRepresentations
+                                        ofEntity:(NSEntityDescription *)entity
+                                    fromResponse:(NSHTTPURLResponse *)response
+                                     withContext:(NSManagedObjectContext *)context
+                                           error:(NSError *__autoreleasing *)error
+                                 completionBlock:(void (^)(NSArray *managedObjects, NSArray *backingObjects))completionBlock;
 
 @end
 
